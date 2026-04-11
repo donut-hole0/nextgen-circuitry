@@ -29,7 +29,7 @@
 <main class="section-wrap page-enter">
   <div class="hero-tag">// FREE ELECTRONICS &amp; CODING EDUCATION</div>
   <h1>Building the next<br/>generation of <span>makers.</span></h1>
-  <p>NextGen Circuitry is a free electronics and coding program for elementary and middle school students. We teach Arduinos, circuits, and real engineering — hands-on.</p>
+  <p>NextGen Circuitry is a free electronics and coding program for elementary and middle school students. We teach Arduinos, circuits, and real engineering that is hands-on.</p>
   <a href="/programs" class="btn-primary">OUR PROGRAMS</a>
   <a href="/contact" class="btn-secondary">GET INVOLVED</a>
 
@@ -39,7 +39,7 @@
       <div class="stat-label">session camp curriculum</div>
     </div>
     <div class="stat">
-      <div class="stat-num">4–8</div>
+      <div class="stat-num">3–6</div>
       <div class="stat-label">grade range</div>
     </div>
     <div class="stat">

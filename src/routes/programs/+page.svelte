@@ -6,7 +6,7 @@
   <div class="section-label">// PROGRAMS</div>
   <div class="divider"></div>
   <h2>What we offer.</h2>
-  <p>All programs are free, beginner-friendly, and designed for 3rd–7th graders with zero prior experience.</p>
+  <p>All programs are free, beginner-friendly, and designed for 3rd–6th graders with zero prior experience.</p>
 
   <div class="list">
     {#each programs as program}
@@ -15,7 +15,11 @@
           <h3>{program.title}</h3>
           <p>{program.desc}</p>
         </div>
-        <span class="badge">{program.badge}</span>
+        {#if program.link}
+          <a href={program.link} target="_blank" class="badge signup">SIGN UP</a>
+        {:else if program.badge}
+          <span class="badge">{program.badge}</span>
+        {/if}
       </div>
     {/each}
   </div>
@@ -26,22 +30,26 @@
     {
       title: 'Summer Camp — 6-Day Intensive',
       desc: 'Six sessions covering circuits, Arduino programming, servos, buzzers, and ultrasonic sensors. Students leave with a working project they built themselves.',
-      badge: 'BEGINNER'
+      badge: 'BEGINNER',
+      link: 'https://forms.gle/GeUMF91Ncqd5JMQ29'
     },
     {
       title: 'TinkerCAD Circuit Design Workshop',
       desc: 'Introduction to virtual circuit simulation using TinkerCAD. Build and test circuits in a browser before touching real hardware.',
-      badge: 'COMING SOON'
+      badge: 'COMING SOON',
+      link: null
     },
     {
       title: 'Arduino Basics',
       desc: 'Write your first real code and make hardware respond to it. LEDs, sensors, buttons — if it blinks or beeps, we\'ll build it.',
-      badge: 'COMING SOON'
+      badge: 'COMING SOON',
+      link: null
     },
     {
       title: 'Science Fair Mentorship',
       desc: 'We support students working on electronics and coding projects for local science fairs, offering guidance and hardware assistance.',
-      badge: 'BY REQUEST'
+      badge: 'BY REQUEST',
+      link: null
     }
   ];
 </script>
@@ -102,5 +110,18 @@
     white-space: nowrap;
     margin-left: 1rem;
     flex-shrink: 0;
+  }
+
+  .badge.signup {
+    background: var(--teal);
+    color: var(--navy);
+    border-color: var(--teal);
+    text-decoration: none;
+    transition: background 0.2s;
+  }
+
+  .badge.signup:hover {
+    background: var(--teal-dim);
+    border-color: var(--teal-dim);
   }
 </style>
