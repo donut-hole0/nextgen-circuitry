@@ -26,17 +26,17 @@
     {
       title: 'Summer Camp — 6-Day Intensive',
       desc: 'Six sessions covering circuits, Arduino programming, servos, buzzers, and ultrasonic sensors. Students leave with a working project they built themselves.',
-      badge: 'GRADES 4–7'
+      badge: 'BEGINNER'
     },
     {
       title: 'TinkerCAD Circuit Design Workshop',
       desc: 'Introduction to virtual circuit simulation using TinkerCAD. Build and test circuits in a browser before touching real hardware.',
-      badge: 'BEGINNER'
+      badge: 'COMING SOON'
     },
     {
       title: 'Arduino Basics',
       desc: 'Write your first real code and make hardware respond to it. LEDs, sensors, buttons — if it blinks or beeps, we\'ll build it.',
-      badge: 'HANDS-ON'
+      badge: 'COMING SOON'
     },
     {
       title: 'Science Fair Mentorship',
