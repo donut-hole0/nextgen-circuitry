@@ -12,12 +12,12 @@
     <div class="card">
       <div class="card-tag">01 // MISSION</div>
       <h3>Free for everyone</h3>
-      <p>We believe engineering education shouldn't have a price tag. Every session, every kit, every workshop is completely free for students.</p>
+      <p>We believe engineering education shouldn't have a price tag. Every session, every kit, every workshop is completely free for students — especially those in underserved communities who rarely get access to hands-on STEM programs.</p>
     </div>
     <div class="card">
       <div class="card-tag">02 // METHOD</div>
       <h3>Hands-on learning</h3>
-      <p>Students build real circuits, program real Arduinos, and solve real problems — not simulations. We learn by doing.</p>
+      <p>Students build real circuits, program real Arduinos, and solve real problems — not only simulations. We learn by doing.</p>
     </div>
     <div class="card">
       <div class="card-tag">03 // WHO WE ARE</div>
@@ -27,7 +27,7 @@
     <div class="card">
       <div class="card-tag">04 // IMPACT</div>
       <h3>Community focused</h3>
-      <p>Operating in Rancho Peñasquitos, partnering with local libraries and schools to bring STEM to students in our own neighborhood.</p>
+      <p>Operating in Rancho Peñasquitos library, partnering with local libraries and schools to bring STEM to students in our own neighborhood.</p>
     </div>
   </div>
 </main>
