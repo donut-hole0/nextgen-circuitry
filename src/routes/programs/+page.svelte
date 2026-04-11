@@ -6,7 +6,7 @@
   <div class="section-label">// PROGRAMS</div>
   <div class="divider"></div>
   <h2>What we offer.</h2>
-  <p>All programs are free, beginner-friendly, and designed for 4th–7th graders with zero prior experience.</p>
+  <p>All programs are free, beginner-friendly, and designed for 3rd–7th graders with zero prior experience.</p>
 
   <div class="list">
     {#each programs as program}
