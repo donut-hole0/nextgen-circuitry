@@ -4,14 +4,9 @@
 
 <nav>
   <a href="/" class="nav-logo">
-    <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <rect x="2" y="2" width="7" height="7" rx="1" stroke="#00e5b0" stroke-width="1.2"/>
-      <rect x="11" y="2" width="7" height="7" rx="1" stroke="#00e5b0" stroke-width="1.2"/>
-      <rect x="2" y="11" width="7" height="7" rx="1" stroke="#00e5b0" stroke-width="1.2"/>
-      <rect x="11" y="11" width="7" height="7" rx="1" stroke="#00e5b0" stroke-width="1.2"/>
-    </svg>
-    NEXTGEN CIRCUITRY
-  </a>
+  <img src="/NextGen_Ciruitry_Logo.png" alt="NextGen Circuitry" height="36" />
+  NEXTGEN CIRCUITRY
+</a>
 
   <ul>
     <li><a href="/" class:active={$page.url.pathname === '/'}>HOME</a></li>
@@ -64,4 +59,9 @@
   ul a.active {
     color: var(--teal);
   }
+
+  .nav-logo img {
+  height: 36px;
+  width: auto;
+}
 </style>
