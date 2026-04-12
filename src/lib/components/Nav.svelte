@@ -12,6 +12,7 @@
     <li><a href="/about" class:active={$page.url.pathname === '/about'}>ABOUT</a></li>
     <li><a href="/programs" class:active={$page.url.pathname === '/programs'}>PROGRAMS</a></li>
     <li><a href="/contact" class:active={$page.url.pathname === '/contact'}>CONTACT</a></li>
+    <li><a href="/support" class:active={$page.url.pathname === '/support'}>SUPPORT</a></li>
   </ul>
 </nav>
 
@@ -63,4 +64,5 @@
   height: 55px;
   width: auto;
 }
+
 </style>
