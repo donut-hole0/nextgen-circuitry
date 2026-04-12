@@ -4,8 +4,7 @@
 
 <nav>
   <a href="/" class="nav-logo">
-  <img src="/NextGen_Ciruitry_Logo.png" alt="NextGen Circuitry" height="36" />
-  NEXTGEN CIRCUITRY
+  <img src="/NextGen_Ciruitry_Logo.png" alt="NextGen Circuitry" height="72" />
 </a>
 
   <ul>
@@ -61,7 +60,7 @@
   }
 
   .nav-logo img {
-  height: 36px;
+  height: 72px;
   width: auto;
 }
 </style>
