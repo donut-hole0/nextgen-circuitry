@@ -5,3 +5,4 @@ main = "./.cloudflare/worker.js"
 
 [assets]
 directory = "./.cloudflare/assets"
+binding = "ASSETS"
