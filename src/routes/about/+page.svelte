@@ -1,24 +1,24 @@
 <script>
-  import { reveal } from '$lib/actions/reveal.js';
+  import { reveal, linesUp, spotlight, magnetic, countUp } from '$lib/motion.js';
 
   const values = [
     {
-      tag: '01 // MISSION',
+      kicker: 'Mission',
       title: 'Free, no asterisks',
-      desc: 'Every session, every component, every kit is completely free — built for kids in underserved communities who rarely get hands-on STEM access. Cost should never be the reason a kid never tries.'
+      desc: 'Every session, every component, every kit is completely free. Built for kids in underserved communities who rarely get hands-on STEM access. Cost should never be the reason a kid never tries.'
     },
     {
-      tag: '02 // METHOD',
+      kicker: 'Method',
       title: 'Learn by building',
       desc: 'No textbooks, no lectures, no passive screens. Students wire real circuits, program real Arduinos, and debug real problems. The fastest way to learn engineering is to do engineering.'
     },
     {
-      tag: '03 // WHO WE ARE',
+      kicker: 'Who we are',
       title: 'Run by students',
-      desc: "We're high schoolers from Westview's Circuitry Club. We taught ourselves to build — now we're passing that down to the kids coming up behind us."
+      desc: 'We are high schoolers from Westview’s Circuitry Club. We taught ourselves to build, and now we are passing that down to the kids coming up behind us.'
     },
     {
-      tag: '04 // IMPACT',
+      kicker: 'Impact',
       title: 'Rooted in community',
       desc: 'We operate out of the Rancho Peñasquitos library and partner with local schools and libraries to bring engineering to kids in our own neighborhood.'
     }
@@ -26,39 +26,44 @@
 </script>
 
 <svelte:head>
-  <title>About — NextGen Circuitry</title>
-  <meta name="description" content="NextGen Circuitry is a student-run nonprofit-style program bringing free, hands-on electronics and coding education to kids in San Diego." />
+  <title>About - NextGen Circuitry</title>
+  <meta name="description" content="NextGen Circuitry is a student-run program bringing free, hands-on electronics and coding education to kids in San Diego." />
 </svelte:head>
 
-<main class="section-wrap page-enter">
-  <div use:reveal>
-    <div class="section-label">// About us</div>
-    <div class="divider"></div>
-    <h2>We teach electronics<br />the way we wish we'd <span>learned it.</span></h2>
-    <p class="intro">
-      NextGen Circuitry started with a simple frustration: real engineering felt locked
-      behind expensive camps and gatekept clubs. So a group of students at Westview High
-      School decided to tear that gate down — and teach younger kids to build, for free.
+<main class="section-wrap page-top">
+  <div class="intro-grid">
+    <div>
+      <div class="section-label">About us</div>
+      <h2 class="h2" use:linesUp>
+        <span class="line"><span class="ln">We teach electronics</span></span>
+        <span class="line"><span class="ln">the way we wish we</span></span>
+        <span class="line"><span class="ln">had <span class="accent">learned it.</span></span></span>
+      </h2>
+    </div>
+    <p class="intro" use:reveal={{ delay: 0.2 }}>
+      NextGen Circuitry started with a simple frustration. Real engineering felt locked behind
+      expensive camps and gatekept clubs. So a group of students at Westview High School decided
+      to tear that gate down, and teach younger kids to build, for free.
     </p>
   </div>
 
   <div class="grid">
-    {#each values as v, i}
-      <div class="card value-card" use:reveal={{ delay: i * 80 }}>
-        <div class="card-tag">{v.tag}</div>
+    {#each values as v (v.title)}
+      <article class="card value-card" use:spotlight use:reveal>
+        <span class="kicker">{v.kicker}</span>
         <h3>{v.title}</h3>
         <p>{v.desc}</p>
-      </div>
+      </article>
     {/each}
   </div>
 
-  <div class="band" use:reveal>
+  <div class="band" use:reveal={{ children: true }}>
     <div class="band-item">
-      <div class="band-num">$0</div>
-      <span>Cost to every student we've ever taught</span>
+      <div class="band-num"><span use:countUp={{ to: 0, prefix: '$' }}>$0</span></div>
+      <span>Cost to every student we have ever taught</span>
     </div>
     <div class="band-item">
-      <div class="band-num">100%</div>
+      <div class="band-num"><span use:countUp={{ to: 100, suffix: '%' }}>100%</span></div>
       <span>Of donations go straight to hardware</span>
     </div>
     <div class="band-item">
@@ -67,78 +72,75 @@
     </div>
   </div>
 
-  <div class="closing" use:reveal>
-    <p>
-      We're not a company and we're not in this for a résumé line. We're students who
-      remember exactly what it felt like to want to build something and not know where to
-      start — and we'd rather no kid feel that way again.
+  <div class="closing">
+    <p use:linesUp={{ stagger: 0.1 }}>
+      <span class="line"><span class="ln">We are not a company, and we are not</span></span>
+      <span class="line"><span class="ln">in this for a r&eacute;sum&eacute; line. We just</span></span>
+      <span class="line"><span class="ln">remember wanting to build something</span></span>
+      <span class="line"><span class="ln">and not knowing where to start.</span></span>
     </p>
-    <a href="/programs" class="btn-primary">SEE OUR PROGRAMS <span class="btn-arrow">→</span></a>
+    <a href="/programs" class="btn-primary" use:magnetic use:reveal={{ delay: 0.3 }}>See our programs <span class="btn-arrow">→</span></a>
   </div>
 </main>
 
 <style>
-  h2 {
-    font-size: clamp(1.6rem, 3.4vw, 2.2rem);
-    margin-bottom: 1.25rem;
-    line-height: 1.18;
-    color: var(--white);
-  }
-  h2 span { color: var(--teal); }
+  .page-top { padding-top: 11rem; }
 
+  .intro-grid {
+    display: grid;
+    grid-template-columns: 1.25fr 0.9fr;
+    gap: 3rem;
+    align-items: end;
+    margin-bottom: 3.5rem;
+  }
   .intro {
     color: var(--muted);
-    font-size: 16.5px;
-    line-height: 1.75;
-    max-width: 640px;
+    font-size: 16px;
+    line-height: 1.8;
     font-weight: 300;
+    max-width: 440px;
   }
 
   .grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 1.25rem;
-    margin-top: 2.75rem;
+    gap: 1.1rem;
   }
-
-  .card-tag {
+  .kicker {
     font-family: var(--font-head);
     font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.16em;
     color: var(--teal);
-    margin-bottom: 0.85rem;
-    letter-spacing: 0.1em;
   }
+  .value-card { display: flex; flex-direction: column; gap: 0.7rem; }
   .value-card h3 {
     font-family: var(--font-head);
-    font-size: 16px;
-    margin-bottom: 0.6rem;
+    font-size: 1.25rem;
     color: var(--white);
+    letter-spacing: -0.01em;
   }
-  .value-card p {
-    font-size: 14px;
-    color: var(--muted);
-    line-height: 1.7;
-    font-weight: 300;
-  }
+  .value-card p { font-size: 14px; color: var(--muted); line-height: 1.75; font-weight: 300; }
 
   .band {
-    margin-top: 2.75rem;
+    margin-top: 1.1rem;
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    gap: 1rem;
-    padding: 2rem;
+    gap: 1.1rem;
+    padding: 2.5rem 2rem;
     border-radius: var(--radius);
     border: 1px solid var(--border-teal);
-    background: linear-gradient(180deg, rgba(0,229,176,0.05), transparent);
+    background: linear-gradient(180deg, rgba(0,229,176,0.06), transparent);
   }
   .band-item { text-align: center; }
   .band-num {
     font-family: var(--font-head);
-    font-size: 2rem;
+    font-size: 2.2rem;
     color: var(--teal);
-    margin-bottom: 0.4rem;
+    margin-bottom: 0.5rem;
+    letter-spacing: -0.03em;
   }
-  .band-item span {
+  .band-item > span {
     font-size: 13px;
     color: var(--muted);
     line-height: 1.5;
@@ -148,21 +150,23 @@
   }
 
   .closing {
-    margin-top: 3rem;
+    margin-top: 4.5rem;
     text-align: center;
-    max-width: 620px;
+    max-width: 720px;
     margin-inline: auto;
   }
   .closing p {
-    font-size: 16px;
+    font-family: var(--font-head);
+    font-size: clamp(1.2rem, 2.6vw, 1.8rem);
     color: var(--white);
-    line-height: 1.75;
-    margin-bottom: 1.75rem;
-    font-weight: 300;
+    line-height: 1.32;
+    letter-spacing: -0.02em;
+    margin-bottom: 2rem;
   }
 
-  @media (max-width: 720px) {
+  @media (max-width: 820px) {
+    .intro-grid { grid-template-columns: 1fr; gap: 1.2rem; align-items: start; }
     .grid { grid-template-columns: 1fr; }
-    .band { grid-template-columns: 1fr; gap: 1.5rem; }
+    .band { grid-template-columns: 1fr; gap: 1.8rem; }
   }
 </style>
