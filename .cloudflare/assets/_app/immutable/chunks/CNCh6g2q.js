@@ -1,0 +1,1 @@
+var e=`alanthomasat123@gmail.com`,t=`https://www.gofundme.com/f/nextgen-circuitry-9bt48`,n=`https://forms.gle/GeUMF91Ncqd5JMQ29`,r={name:`NextGen Circuitry`,school:`Westview High School`,location:`Rancho Peñasquitos, San Diego`,operatedBy:`Westview Circuitry Club`};export{n as i,t as n,r,e as t};
