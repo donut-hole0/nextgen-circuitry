@@ -37,7 +37,7 @@
   <h2 id="donate">Donate</h2>
   <div class="cta-box" use:reveal>
     <div class="cta-text">
-      <div class="cta-tag"><span class="dot"></span>Verified GoFundMe</div>
+      <div class="cta-tag">Verified GoFundMe</div>
       <h3>Every dollar goes toward the kids.</h3>
       <p>
         We are a student-run program with no overhead, so 100% of donations fund the materials
@@ -107,7 +107,6 @@
     font-family: var(--font-mono); font-size: 11px; color: var(--accent);
     letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 0.7rem;
   }
-  .cta-tag .dot { width: 7px; height: 7px; border-radius: 50%; background: var(--accent); animation: pulse 2.4s infinite; }
   .cta-text h3 { font-size: 1.4rem; margin: 0 0 0.6rem !important; color: var(--text-strong); letter-spacing: -0.01em; }
   .cta-text p { font-size: 14px; color: var(--muted); line-height: 1.7; max-width: 480px; margin: 0 !important; }
   .cta-btn { white-space: nowrap; flex-shrink: 0; }

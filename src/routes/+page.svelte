@@ -39,7 +39,7 @@
 
 <section class="hero">
   <div class="hero-inner">
-    <div class="eyebrow" use:reveal><span class="dot"></span>Free electronics and coding · San Diego</div>
+    <div class="eyebrow" use:reveal>Free electronics and coding · San Diego</div>
 
     <h1 class="display" use:reveal={{ delay: 0.05 }}>
       Building the next<br />generation of <span class="accent">makers.</span>

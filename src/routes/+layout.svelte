@@ -121,7 +121,7 @@
     transition: color 0.2s, transform 0.3s var(--ease);
     width: fit-content;
   }
-  .foot-col a:hover { color: var(--accent); transform: translateX(4px); }
+  .foot-col a:hover { color: var(--text-strong); }
   .foot-static { font-size: 13px; color: var(--muted-dim); }
 
   .foot-bar {

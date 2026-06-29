@@ -9,10 +9,10 @@
   let open = $state(false);
 
   const links = [
-    { href: '/', label: 'HOME' },
-    { href: '/about', label: 'ABOUT' },
-    { href: '/programs', label: 'PROGRAMS' },
-    { href: '/contact', label: 'CONTACT' }
+    { href: '/', label: 'Home' },
+    { href: '/about', label: 'About' },
+    { href: '/programs', label: 'Programs' },
+    { href: '/contact', label: 'Contact' }
   ];
 
   onMount(() => {
@@ -41,7 +41,7 @@
   </ul>
 
   <div class="nav-right">
-    <a href="/support" class="nav-cta">SUPPORT US</a>
+    <a href="/support" class="nav-cta">Support us</a>
     <ThemeToggle />
     <button
       class="burger"
@@ -60,7 +60,7 @@
     {#each links as link}
       <a href={link.href} class:active={$page.url.pathname === link.href}>{link.label}</a>
     {/each}
-    <a href="/support" class="nav-cta mobile-cta">SUPPORT US</a>
+    <a href="/support" class="nav-cta mobile-cta">Support us</a>
   </div>
 {/if}
 
@@ -92,44 +92,29 @@
     margin-left: auto;
   }
   ul.desktop a {
-    position: relative;
-    font-size: 12.5px;
-    font-family: var(--font-mono);
+    font-size: 14px;
+    font-family: var(--font-body);
+    font-weight: 500;
     color: var(--muted);
-    letter-spacing: 0.06em;
-    transition: color 0.2s;
+    transition: color 0.15s;
   }
-  ul.desktop a::after {
-    content: '';
-    position: absolute;
-    left: 0;
-    bottom: -7px;
-    width: 100%;
-    height: 2px;
-    background: var(--accent);
-    border-radius: 2px;
-    transform: scaleX(0);
-    transform-origin: left;
-    transition: transform 0.3s var(--ease);
-  }
-  ul.desktop a:hover { color: var(--text); }
-  ul.desktop a.active { color: var(--accent); }
-  ul.desktop a.active::after,
-  ul.desktop a:hover::after { transform: scaleX(1); }
+  ul.desktop a:hover { color: var(--text-strong); }
+  ul.desktop a.active { color: var(--text-strong); }
 
   .nav-right { display: flex; align-items: center; gap: 0.85rem; }
 
   .nav-cta {
-    font-family: var(--font-mono);
-    font-size: 12px;
-    letter-spacing: 0.04em;
-    color: #ffffff;
-    background: var(--accent);
-    padding: 9px 16px;
+    font-family: var(--font-body);
+    font-size: 13px;
+    font-weight: 500;
+    letter-spacing: 0;
+    color: var(--on-accent);
+    background: var(--text-strong);
+    padding: 8px 14px;
     border-radius: var(--radius-sm);
-    transition: background 0.25s var(--ease);
+    transition: opacity 0.15s var(--ease);
   }
-  .nav-cta:hover { background: var(--accent-strong); }
+  .nav-cta:hover { opacity: 0.88; }
 
   /* Burger */
   .burger {
