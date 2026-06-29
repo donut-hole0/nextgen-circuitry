@@ -1,6 +1,9 @@
 <script>
-  import { reveal, linesUp, spotlight, magnetic } from '$lib/motion.js';
+  import { reveal } from '$lib/motion.js';
   import { SIGNUP_FORM_URL } from '$lib/config.js';
+  import DocsLayout from '$lib/components/DocsLayout.svelte';
+
+  const slug = (s) => s.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
 
   const programs = [
     {
@@ -39,28 +42,22 @@
   <meta name="description" content="Free, beginner-friendly electronics and coding programs for 3rd to 6th graders: summer camp, Arduino basics, TinkerCAD, and science fair mentorship." />
 </svelte:head>
 
-<main class="section-wrap page-top">
-  <div class="head">
-    <div class="section-label">Programs</div>
-    <h2 class="h2" use:linesUp>
-      <span class="line"><span class="ln">What we offer.</span></span>
-    </h2>
-    <p class="intro" use:reveal={{ delay: 0.2 }}>
-      Every program is free, beginner-friendly, and built for 3rd to 6th graders with zero prior
-      experience. No laptop or supplies required. We bring everything.
-    </p>
-  </div>
+<DocsLayout title="Programs">
+  <p class="intro">
+    Every program is free, beginner-friendly, and built for 3rd to 6th graders with zero prior
+    experience. No laptop or supplies required. We bring everything.
+  </p>
 
   <div class="list">
     {#each programs as p, i (p.title)}
-      <article class="card item" class:open={p.status === 'open'} use:spotlight use:reveal>
+      <article class="card item" class:open={p.status === 'open'} use:reveal>
         <div class="item-index">{String(i + 1).padStart(2, '0')}</div>
         <div class="info">
-          <h3>{p.title}</h3>
+          <h3 id={slug(p.title)}>{p.title}</h3>
           <p>{p.desc}</p>
         </div>
         {#if p.link}
-          <a href={p.link} target="_blank" rel="noopener" class="badge signup" use:magnetic={{ strength: 0.2 }}>
+          <a href={p.link} target="_blank" rel="noopener" class="btn-primary signup">
             Sign up <span class="btn-arrow">→</span>
           </a>
         {:else}
@@ -76,36 +73,33 @@
       <a href="/contact">Reach out.</a> We love new partners.
     </p>
   </div>
-</main>
+</DocsLayout>
 
 <style>
-  .page-top { padding-top: 11rem; }
-  .head { margin-bottom: 3rem; }
   .intro {
-    color: var(--muted);
+    color: var(--muted) !important;
     font-size: 16px;
     line-height: 1.8;
     max-width: 580px;
-    font-weight: 300;
-    margin-top: 1rem;
+    margin-bottom: 2.5rem !important;
   }
 
-  .list { display: flex; flex-direction: column; gap: 1.1rem; }
+  .list { display: flex; flex-direction: column; gap: 1rem; }
 
   .item {
     display: flex;
     align-items: flex-start;
-    gap: 1.6rem;
-    border-left: 2px solid var(--border);
-    padding: 2rem 2.2rem;
+    gap: 1.4rem;
+    padding: 1.6rem 1.8rem;
+    border-left: 3px solid var(--border);
   }
-  .item.open { border-left-color: var(--teal); }
+  .item.open { border-left-color: var(--accent); }
 
   .item-index {
-    font-family: var(--font-head);
+    font-family: var(--font-mono);
     font-size: 13px;
-    color: var(--teal);
-    opacity: 0.55;
+    color: var(--accent);
+    opacity: 0.7;
     flex-shrink: 0;
     margin-top: 4px;
     letter-spacing: 0.05em;
@@ -113,22 +107,17 @@
 
   .info { flex: 1; }
   .info h3 {
-    font-family: var(--font-head);
-    font-size: 1.2rem;
-    margin-bottom: 0.55rem;
-    color: var(--white);
+    font-size: 1.15rem;
+    margin: 0 0 0.5rem !important;
+    color: var(--text-strong);
     letter-spacing: -0.01em;
   }
-  .info p {
-    font-size: 14px;
-    color: var(--muted);
-    line-height: 1.7;
-    max-width: 600px;
-    font-weight: 300;
-  }
+  .info p { font-size: 14px; color: var(--muted); line-height: 1.7; max-width: 600px; margin: 0 !important; }
+
+  .signup { flex-shrink: 0; margin-top: 2px; }
 
   .badge {
-    font-family: var(--font-head);
+    font-family: var(--font-mono);
     font-size: 10.5px;
     letter-spacing: 0.06em;
     text-transform: uppercase;
@@ -137,28 +126,16 @@
     white-space: nowrap;
     flex-shrink: 0;
     margin-top: 4px;
-    border: 1px solid var(--border);
+    border: 1px solid var(--border-strong);
     color: var(--muted);
   }
-  .badge.request { color: var(--teal-soft); border-color: var(--border-teal); }
+  .badge.request { color: var(--accent); border-color: var(--accent); }
 
-  .badge.signup {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.4rem;
-    color: var(--navy);
-    background: linear-gradient(180deg, var(--teal-soft), var(--teal));
-    border: none;
-    box-shadow: 0 8px 20px -8px var(--teal-glow-strong);
-  }
-
-  .note { margin-top: 3rem; text-align: center; }
+  .note { margin-top: 2.5rem; text-align: center; }
   .note p { font-size: 14.5px; color: var(--muted); }
-  .note a { color: var(--teal); border-bottom: 1px solid var(--border-teal); }
-  .note a:hover { border-color: var(--teal); }
 
   @media (max-width: 640px) {
-    .item { flex-wrap: wrap; gap: 1rem; padding: 1.6rem 1.5rem; }
-    .badge.signup, .badge { order: 3; }
+    .item { flex-wrap: wrap; gap: 1rem; padding: 1.4rem 1.4rem; }
+    .signup, .badge { order: 3; }
   }
 </style>
