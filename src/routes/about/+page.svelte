@@ -1,5 +1,8 @@
 <script>
-  import { reveal, linesUp, spotlight, magnetic, countUp } from '$lib/motion.js';
+  import { reveal } from '$lib/motion.js';
+  import DocsLayout from '$lib/components/DocsLayout.svelte';
+
+  const slug = (s) => s.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
 
   const values = [
     {
@@ -30,28 +33,18 @@
   <meta name="description" content="NextGen Circuitry is a student-run program bringing free, hands-on electronics and coding education to kids in San Diego." />
 </svelte:head>
 
-<main class="section-wrap page-top">
-  <div class="intro-grid">
-    <div>
-      <div class="section-label">About us</div>
-      <h2 class="h2" use:linesUp>
-        <span class="line"><span class="ln">We teach electronics</span></span>
-        <span class="line"><span class="ln">the way we wish we</span></span>
-        <span class="line"><span class="ln">had <span class="accent">learned it.</span></span></span>
-      </h2>
-    </div>
-    <p class="intro" use:reveal={{ delay: 0.2 }}>
-      NextGen Circuitry started with a simple frustration. Real engineering felt locked behind
-      expensive camps and gatekept clubs. So a group of students at Westview High School decided
-      to tear that gate down, and teach younger kids to build, for free.
-    </p>
-  </div>
+<DocsLayout title="About us">
+  <p class="lead">
+    NextGen Circuitry started with a simple frustration. Real engineering felt locked behind
+    expensive camps and gatekept clubs. So a group of students at Westview High School decided
+    to tear that gate down, and teach younger kids to build, for free.
+  </p>
 
   <div class="grid">
     {#each values as v (v.title)}
-      <article class="card value-card" use:spotlight use:reveal>
+      <article class="card value-card" use:reveal>
         <span class="kicker">{v.kicker}</span>
-        <h3>{v.title}</h3>
+        <h3 id={slug(v.title)}>{v.title}</h3>
         <p>{v.desc}</p>
       </article>
     {/each}
@@ -59,11 +52,11 @@
 
   <div class="band" use:reveal={{ children: true }}>
     <div class="band-item">
-      <div class="band-num"><span use:countUp={{ to: 0, prefix: '$' }}>$0</span></div>
+      <div class="band-num">$0</div>
       <span>Cost to every student we have ever taught</span>
     </div>
     <div class="band-item">
-      <div class="band-num"><span use:countUp={{ to: 100, suffix: '%' }}>100%</span></div>
+      <div class="band-num">100%</div>
       <span>Of donations go straight to hardware</span>
     </div>
     <div class="band-item">
@@ -73,70 +66,51 @@
   </div>
 
   <div class="closing">
-    <p use:linesUp={{ stagger: 0.1 }}>
-      <span class="line"><span class="ln">We are not a company, and we are not</span></span>
-      <span class="line"><span class="ln">in this for a r&eacute;sum&eacute; line. We just</span></span>
-      <span class="line"><span class="ln">remember wanting to build something</span></span>
-      <span class="line"><span class="ln">and not knowing where to start.</span></span>
+    <p>
+      We are not a company, and we are not in this for a r&eacute;sum&eacute; line. We just
+      remember wanting to build something and not knowing where to start.
     </p>
-    <a href="/programs" class="btn-primary" use:magnetic use:reveal={{ delay: 0.3 }}>See our programs <span class="btn-arrow">→</span></a>
+    <a href="/programs" class="btn-primary" use:reveal>See our programs <span class="btn-arrow">→</span></a>
   </div>
-</main>
+</DocsLayout>
 
 <style>
-  .page-top { padding-top: 11rem; }
-
-  .intro-grid {
-    display: grid;
-    grid-template-columns: 1.25fr 0.9fr;
-    gap: 3rem;
-    align-items: end;
-    margin-bottom: 3.5rem;
-  }
-  .intro {
-    color: var(--muted);
-    font-size: 16px;
+  .lead {
+    color: var(--muted) !important;
+    font-size: 17px;
     line-height: 1.8;
-    font-weight: 300;
-    max-width: 440px;
+    margin-bottom: 2.5rem !important;
   }
 
   .grid {
     display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 1.1rem;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 1rem;
   }
-  .kicker {
-    font-family: var(--font-head);
-    font-size: 11px;
-    text-transform: uppercase;
-    letter-spacing: 0.16em;
-    color: var(--teal);
-  }
-  .value-card { display: flex; flex-direction: column; gap: 0.7rem; }
+  .value-card { display: flex; flex-direction: column; gap: 0.6rem; }
   .value-card h3 {
-    font-family: var(--font-head);
-    font-size: 1.25rem;
-    color: var(--white);
+    font-size: 1.2rem;
+    color: var(--text-strong);
     letter-spacing: -0.01em;
+    margin: 0 !important;
   }
-  .value-card p { font-size: 14px; color: var(--muted); line-height: 1.75; font-weight: 300; }
+  .value-card p { font-size: 14px; color: var(--muted); line-height: 1.75; margin: 0 !important; }
 
   .band {
-    margin-top: 1.1rem;
+    margin-top: 1rem;
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    gap: 1.1rem;
+    gap: 1rem;
     padding: 2.5rem 2rem;
     border-radius: var(--radius);
-    border: 1px solid var(--border-teal);
-    background: linear-gradient(180deg, rgba(0,229,176,0.06), transparent);
+    border: 1px solid var(--border);
+    background: var(--accent-soft);
   }
   .band-item { text-align: center; }
   .band-num {
     font-family: var(--font-head);
     font-size: 2.2rem;
-    color: var(--teal);
+    color: var(--accent);
     margin-bottom: 0.5rem;
     letter-spacing: -0.03em;
   }
@@ -150,23 +124,19 @@
   }
 
   .closing {
-    margin-top: 4.5rem;
+    margin-top: 3.5rem;
     text-align: center;
-    max-width: 720px;
-    margin-inline: auto;
   }
   .closing p {
     font-family: var(--font-head);
-    font-size: clamp(1.2rem, 2.6vw, 1.8rem);
-    color: var(--white);
-    line-height: 1.32;
+    font-size: clamp(1.2rem, 2.6vw, 1.7rem);
+    color: var(--text-strong) !important;
+    line-height: 1.4;
     letter-spacing: -0.02em;
-    margin-bottom: 2rem;
+    margin-bottom: 1.8rem !important;
   }
 
-  @media (max-width: 820px) {
-    .intro-grid { grid-template-columns: 1fr; gap: 1.2rem; align-items: start; }
-    .grid { grid-template-columns: 1fr; }
+  @media (max-width: 540px) {
     .band { grid-template-columns: 1fr; gap: 1.8rem; }
   }
 </style>

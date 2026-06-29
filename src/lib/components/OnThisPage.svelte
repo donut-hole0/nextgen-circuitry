@@ -2,12 +2,12 @@
   import { onMount } from 'svelte';
   import { afterNavigate } from '$app/navigation';
   let { headings = null } = $props();
-  let items = $state(headings ?? []);
+  let items = $state([]);
   let activeId = $state('');
   let observer;
 
   function collect() {
-    if (headings) return;
+    if (headings) { items = headings; return; }
     const nodes = document.querySelectorAll('.docs-content h2[id], .docs-content h3[id]');
     items = Array.from(nodes).map((n) => ({ id: n.id, text: n.textContent, level: +n.tagName[1] }));
     observer?.disconnect();

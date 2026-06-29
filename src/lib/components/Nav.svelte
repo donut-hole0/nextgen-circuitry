@@ -48,7 +48,7 @@
       class:open
       aria-label="Toggle menu"
       aria-expanded={open}
-      on:click={() => (open = !open)}
+      onclick={() => (open = !open)}
     >
       <span></span><span></span><span></span>
     </button>

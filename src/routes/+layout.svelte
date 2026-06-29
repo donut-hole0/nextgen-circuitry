@@ -7,6 +7,7 @@
   import { initSmoothScroll, ensureGsap, scrollTo } from '$lib/motion.js';
   import { CONTACT_EMAIL, DONATE_URL, ORG } from '$lib/config.js';
 
+  let { children } = $props();
   const year = new Date().getFullYear();
 
   onMount(() => {
@@ -23,7 +24,7 @@
 
 <Nav />
 
-<slot />
+{@render children()}
 
 <footer>
   <div class="foot-cta">

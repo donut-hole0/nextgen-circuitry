@@ -1,5 +1,5 @@
 <script>
-  import { reveal, linesUp, spotlight, magnetic } from '$lib/motion.js';
+  import { reveal } from '$lib/motion.js';
   import { CONTACT_EMAIL, ORG } from '$lib/config.js';
 
   let name = $state('');
@@ -44,11 +44,8 @@
 <main class="section-wrap page-top">
   <div class="head">
     <div class="section-label">Contact</div>
-    <h2 class="h2" use:linesUp>
-      <span class="line"><span class="ln">Let's build something</span></span>
-      <span class="line"><span class="ln">for your <span class="accent">kids.</span></span></span>
-    </h2>
-    <p class="intro" use:reveal={{ delay: 0.2 }}>
+    <h2 class="h2" use:reveal>Let's build something for your <span class="accent">kids.</span></h2>
+    <p class="intro" use:reveal={{ delay: 0.1 }}>
       Parent, student, school, or community org. If you want to bring NextGen Circuitry to your
       kids or just have a question, we would genuinely love to hear from you.
     </p>
@@ -56,18 +53,18 @@
 
   <div class="layout">
     <aside class="details" use:reveal={{ children: true }}>
-      <button class="email-card" onclick={copyEmail} title="Click to copy" use:spotlight>
+      <button class="email-card card" onclick={copyEmail} title="Click to copy">
         <span class="email-label">{copied ? 'Copied' : 'Email us directly'}</span>
         <span class="email-addr">{CONTACT_EMAIL}</span>
         <span class="email-hint">{copied ? 'on your clipboard' : 'click to copy'}</span>
       </button>
-      <div class="info-card"><label>School</label><span>{ORG.school}</span></div>
-      <div class="info-card"><label>Location</label><span>{ORG.location}</span></div>
-      <div class="info-card"><label>Operated by</label><span>{ORG.operatedBy}</span></div>
-      <div class="info-card"><label>Program cost</label><span>Always free</span></div>
+      <div class="info-card card"><span class="ic-label">School</span><span>{ORG.school}</span></div>
+      <div class="info-card card"><span class="ic-label">Location</span><span>{ORG.location}</span></div>
+      <div class="info-card card"><span class="ic-label">Operated by</span><span>{ORG.operatedBy}</span></div>
+      <div class="info-card card"><span class="ic-label">Program cost</span><span>Always free</span></div>
     </aside>
 
-    <div class="form-wrap" use:reveal={{ delay: 0.1 }}>
+    <div class="form-wrap card" use:reveal={{ delay: 0.1 }}>
       {#if opened}
         <div class="success">
           <span>Email ready</span>
@@ -94,7 +91,7 @@
             <label for="message">Message</label>
             <textarea id="message" bind:value={message} placeholder="Tell us a bit about what you are looking for." required></textarea>
           </div>
-          <button type="submit" class="btn-primary" use:magnetic={{ strength: 0.2 }}>Send message <span class="btn-arrow">→</span></button>
+          <button type="submit" class="btn-primary">Send message <span class="btn-arrow">→</span></button>
           <p class="form-note">Opens your email app with everything filled in. Nothing is sent until you hit send there.</p>
         </form>
       {/if}
@@ -103,14 +100,14 @@
 </main>
 
 <style>
-  .page-top { padding-top: 11rem; }
+  .page-top { padding-top: calc(var(--nav-h) + 4rem); max-width: 960px; }
   .head { margin-bottom: 3rem; }
+  .h2 { margin-top: 0.8rem; }
   .intro {
     color: var(--muted);
     font-size: 16px;
     line-height: 1.8;
     max-width: 540px;
-    font-weight: 300;
     margin-top: 1rem;
   }
 
@@ -128,62 +125,41 @@
     gap: 4px;
     text-align: left;
     cursor: pointer;
-    background: linear-gradient(180deg, rgba(0,229,176,0.09), rgba(0,229,176,0.02));
-    border: 1px solid var(--border-teal);
-    border-radius: var(--radius-sm);
+    background: var(--accent-soft);
+    border-color: var(--accent);
     padding: 1.2rem 1.3rem;
     font-family: var(--font-body);
-    overflow: hidden;
-    position: relative;
-    transition: border-color 0.3s var(--ease);
   }
-  .email-card::before {
-    content: '';
-    position: absolute; inset: 0;
-    background: radial-gradient(300px circle at var(--mx,50%) var(--my,0), var(--teal-glow), transparent 45%);
-    opacity: 0; transition: opacity 0.3s var(--ease); pointer-events: none;
-  }
-  .email-card:hover { border-color: var(--teal); }
-  .email-card:hover::before { opacity: 1; }
   .email-label {
-    font-family: var(--font-head); font-size: 10px; color: var(--teal);
+    font-family: var(--font-mono); font-size: 10px; color: var(--accent);
     letter-spacing: 0.12em; text-transform: uppercase;
   }
-  .email-addr { font-size: 15px; color: var(--white); word-break: break-all; }
+  .email-addr { font-size: 15px; color: var(--text-strong); word-break: break-all; }
   .email-hint { font-size: 11px; color: var(--muted-dim); }
 
   .info-card {
-    background: var(--navy-card);
-    border: 1px solid var(--border);
-    border-radius: var(--radius-sm);
     padding: 1rem 1.2rem;
     display: flex; flex-direction: column; gap: 4px;
   }
-  .info-card label {
-    font-family: var(--font-head); font-size: 10px; color: var(--teal);
+  .info-card .ic-label {
+    font-family: var(--font-mono); font-size: 10px; color: var(--accent);
     letter-spacing: 0.1em; text-transform: uppercase;
   }
-  .info-card span { font-size: 14px; color: var(--white); }
+  .info-card span { font-size: 14px; color: var(--text-strong); }
 
-  .form-wrap {
-    background: linear-gradient(180deg, var(--navy-card-hi), var(--navy-card));
-    border: 1px solid var(--border);
-    border-radius: var(--radius);
-    padding: 2rem;
-    box-shadow: var(--shadow-card);
-  }
+  .form-wrap { padding: 2rem; }
   form { display: flex; flex-direction: column; gap: 1.1rem; }
   .row.two { display: grid; grid-template-columns: 1fr 1fr; gap: 1.1rem; }
   .form-row { display: flex; flex-direction: column; gap: 7px; }
   .form-row label {
-    font-family: var(--font-head); font-size: 10px; color: var(--teal);
+    font-family: var(--font-mono); font-size: 10px; color: var(--accent);
     letter-spacing: 0.1em; text-transform: uppercase;
   }
   input, textarea {
-    background: rgba(0,0,0,0.28);
-    border: 1px solid var(--border);
+    background: var(--surface);
+    border: 1px solid var(--border-strong);
     border-radius: var(--radius-sm);
-    color: var(--white);
+    color: var(--text);
     font-family: var(--font-body);
     font-size: 14px;
     padding: 12px 14px;
@@ -193,19 +169,19 @@
   }
   input::placeholder, textarea::placeholder { color: var(--muted-dim); }
   input:focus, textarea:focus {
-    border-color: var(--teal);
-    box-shadow: 0 0 0 3px var(--teal-glow);
+    border-color: var(--accent);
+    box-shadow: 0 0 0 3px var(--ring);
   }
   textarea { min-height: 130px; resize: vertical; }
   .form-note { font-size: 12px; color: var(--muted-dim); line-height: 1.5; }
 
   .success { display: flex; flex-direction: column; align-items: flex-start; gap: 0.9rem; }
   .success span {
-    font-family: var(--font-head); font-size: 12px; color: var(--teal);
+    font-family: var(--font-mono); font-size: 12px; color: var(--accent);
     letter-spacing: 0.1em; text-transform: uppercase;
   }
-  .success p { font-size: 15px; color: var(--white); line-height: 1.7; font-weight: 300; }
-  .success a { color: var(--teal); border-bottom: 1px solid var(--border-teal); }
+  .success p { font-size: 15px; color: var(--text); line-height: 1.7; }
+  .success a { color: var(--accent); border-bottom: 1px solid var(--accent); }
 
   @media (max-width: 760px) { .layout { grid-template-columns: 1fr; } }
   @media (max-width: 460px) { .row.two { grid-template-columns: 1fr; } }

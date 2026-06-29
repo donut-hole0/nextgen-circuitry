@@ -3,7 +3,7 @@
   import Sidebar, { navGroups } from '$lib/components/Sidebar.svelte';
   import OnThisPage from '$lib/components/OnThisPage.svelte';
 
-  let { title = '' } = $props();
+  let { title = '', children } = $props();
 </script>
 
 <div class="docs">
@@ -23,7 +23,7 @@
     {#if title}
       <h1 class="display doc-title">{title}</h1>
     {/if}
-    <slot />
+    {@render children()}
   </main>
 
   <OnThisPage />
