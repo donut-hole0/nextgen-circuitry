@@ -1,20 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ClaudeCodeEditorTabs">
-    <option name="activeSessionId" value="d20e5c68-1ce0-461c-9414-ad4204c6cb7e" />
+    <option name="activeSessionId" value="6f86a66e-031e-4e99-a42e-69f3531ec35e" />
     <option name="openSessionIds">
       <list>
-        <option value="d20e5c68-1ce0-461c-9414-ad4204c6cb7e" />
+        <option value="10c55ed5-f87f-4dcf-af70-4a440a1a61bc" />
+        <option value="6f86a66e-031e-4e99-a42e-69f3531ec35e" />
       </list>
     </option>
     <option name="sessionPaths">
       <map>
-        <entry key="d20e5c68-1ce0-461c-9414-ad4204c6cb7e" value="/switch-account" />
+        <entry key="10c55ed5-f87f-4dcf-af70-4a440a1a61bc" value="/sessions/0bf46287-a963-46d2-9526-e015672d8342" />
+        <entry key="6f86a66e-031e-4e99-a42e-69f3531ec35e" value="/settings/account" />
       </map>
     </option>
     <option name="sessionTitles">
       <map>
-        <entry key="d20e5c68-1ce0-461c-9414-ad4204c6cb7e" value="localhost:50883/switch-account?workingDir=C%3A%2FUsers%2Falant%2FDownloads%2FSchool%2FCircuitry_Club%2Fnextgen-fresh&amp;panelId=9661a6b1-11f2-42a5-b943-5326d846ed47&amp;theme=dark" />
+        <entry key="10c55ed5-f87f-4dcf-af70-4a440a1a61bc" value="/effort medium" />
+        <entry key="6f86a66e-031e-4e99-a42e-69f3531ec35e" value="Settings" />
       </map>
     </option>
   </component>
