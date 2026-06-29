@@ -2,6 +2,8 @@
   import { page } from '$app/stores';
   import { afterNavigate } from '$app/navigation';
   import { onMount } from 'svelte';
+  import BrandMark from '$lib/components/BrandMark.svelte';
+  import ThemeToggle from '$lib/components/ThemeToggle.svelte';
 
   let scrolled = $state(false);
   let open = $state(false);
@@ -20,13 +22,12 @@
     return () => window.removeEventListener('scroll', onScroll);
   });
 
-  // close the mobile menu after navigating to a new route
   afterNavigate(() => (open = false));
 </script>
 
 <nav class:scrolled>
   <a href="/" class="nav-logo" aria-label="NextGen Circuitry — home">
-    <img src="/NextGen_Ciruitry_Logo.png" alt="NextGen Circuitry" />
+    <BrandMark height={30} />
   </a>
 
   <ul class="desktop">
@@ -37,20 +38,21 @@
         </a>
       </li>
     {/each}
-    <li>
-      <a href="/support" class="nav-cta">SUPPORT US</a>
-    </li>
   </ul>
 
-  <button
-    class="burger"
-    class:open
-    aria-label="Toggle menu"
-    aria-expanded={open}
-    on:click={() => (open = !open)}
-  >
-    <span></span><span></span><span></span>
-  </button>
+  <div class="nav-right">
+    <a href="/support" class="nav-cta">SUPPORT US</a>
+    <ThemeToggle />
+    <button
+      class="burger"
+      class:open
+      aria-label="Toggle menu"
+      aria-expanded={open}
+      on:click={() => (open = !open)}
+    >
+      <span></span><span></span><span></span>
+    </button>
+  </div>
 </nav>
 
 {#if open}
@@ -70,77 +72,64 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
+    gap: 1rem;
     padding: 0 1.5rem;
-    height: 76px;
-    background: transparent;
+    height: var(--nav-h);
+    background: color-mix(in srgb, var(--bg) 80%, transparent);
+    backdrop-filter: blur(12px) saturate(140%);
     border-bottom: 1px solid transparent;
-    transition: height 0.3s var(--ease), background 0.3s var(--ease),
-      border-color 0.3s var(--ease), backdrop-filter 0.3s var(--ease);
+    transition: background 0.3s var(--ease), border-color 0.3s var(--ease);
   }
+  nav.scrolled { border-bottom-color: var(--border); }
 
-  nav.scrolled {
-    height: 62px;
-    background: rgba(7, 11, 22, 0.72);
-    backdrop-filter: blur(14px) saturate(140%);
-    border-bottom: 1px solid var(--border);
-  }
-
-  .nav-logo img {
-    height: 46px;
-    width: auto;
-    display: block;
-    transition: height 0.3s var(--ease), filter 0.3s var(--ease);
-  }
-  nav.scrolled .nav-logo img { height: 38px; }
-  .nav-logo:hover img { filter: drop-shadow(0 0 10px var(--teal-glow-strong)); }
+  .nav-logo { display: inline-flex; align-items: center; }
 
   ul.desktop {
     display: flex;
     align-items: center;
     gap: 2rem;
     list-style: none;
+    margin-left: auto;
   }
-
   ul.desktop a {
     position: relative;
     font-size: 12.5px;
-    font-family: var(--font-head);
+    font-family: var(--font-mono);
     color: var(--muted);
     letter-spacing: 0.06em;
     transition: color 0.2s;
   }
-
-  ul.desktop a:not(.nav-cta)::after {
+  ul.desktop a::after {
     content: '';
     position: absolute;
     left: 0;
     bottom: -7px;
     width: 100%;
     height: 2px;
-    background: var(--teal);
+    background: var(--accent);
     border-radius: 2px;
     transform: scaleX(0);
     transform-origin: left;
     transition: transform 0.3s var(--ease);
   }
-
-  ul.desktop a:hover { color: var(--white); }
-  ul.desktop a.active { color: var(--teal); }
+  ul.desktop a:hover { color: var(--text); }
+  ul.desktop a.active { color: var(--accent); }
   ul.desktop a.active::after,
-  ul.desktop a:hover:not(.nav-cta)::after { transform: scaleX(1); }
+  ul.desktop a:hover::after { transform: scaleX(1); }
+
+  .nav-right { display: flex; align-items: center; gap: 0.85rem; }
 
   .nav-cta {
-    color: var(--navy) !important;
-    background: linear-gradient(180deg, var(--teal-soft), var(--teal));
-    padding: 8px 16px;
-    border-radius: 999px;
-    box-shadow: 0 6px 18px -8px var(--teal-glow-strong);
-    transition: transform 0.25s var(--ease), box-shadow 0.25s var(--ease);
+    font-family: var(--font-mono);
+    font-size: 12px;
+    letter-spacing: 0.04em;
+    color: #ffffff;
+    background: var(--accent);
+    padding: 9px 16px;
+    border-radius: var(--radius-sm);
+    transition: background 0.25s var(--ease);
   }
-  .nav-cta:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 12px 24px -8px var(--teal-glow-strong);
-  }
+  .nav-cta:hover { background: var(--accent-strong); }
 
   /* Burger */
   .burger {
@@ -159,7 +148,7 @@
     display: block;
     width: 22px;
     height: 2px;
-    background: var(--white);
+    background: var(--text);
     border-radius: 2px;
     transition: transform 0.3s var(--ease), opacity 0.2s;
     margin: 0 auto;
@@ -170,33 +159,32 @@
 
   .mobile-menu {
     position: sticky;
-    top: 62px;
+    top: var(--nav-h);
     z-index: 99;
     display: flex;
     flex-direction: column;
     gap: 0.25rem;
     padding: 1rem 1.5rem 1.5rem;
-    background: rgba(7, 11, 22, 0.96);
-    backdrop-filter: blur(14px);
+    background: var(--bg);
     border-bottom: 1px solid var(--border);
     animation: slidedown 0.3s var(--ease);
   }
   .mobile-menu a {
-    font-family: var(--font-head);
+    font-family: var(--font-mono);
     font-size: 14px;
     color: var(--muted);
     letter-spacing: 0.06em;
     padding: 0.85rem 0.5rem;
     border-bottom: 1px solid var(--border);
   }
-  .mobile-menu a.active { color: var(--teal); }
+  .mobile-menu a.active { color: var(--accent); }
   .mobile-cta {
     text-align: center;
     margin-top: 0.75rem;
     border-bottom: none !important;
-    color: var(--navy) !important;
-    background: linear-gradient(180deg, var(--teal-soft), var(--teal));
-    border-radius: 999px;
+    color: #ffffff !important;
+    background: var(--accent);
+    border-radius: var(--radius-sm);
   }
 
   @keyframes slidedown {
@@ -206,6 +194,7 @@
 
   @media (max-width: 760px) {
     ul.desktop { display: none; }
+    .nav-cta { display: none; }
     .burger { display: flex; }
   }
 </style>
