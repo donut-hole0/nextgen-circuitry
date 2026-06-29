@@ -8,5 +8,5 @@
 
 <style>
   .brand { display: inline-flex; align-items: center; }
-  .brand img { height: var(--h); width: auto; display: block; }
+  .brand img { height: var(--h); width: auto; display: block; border-radius: 6px; }
 </style>
